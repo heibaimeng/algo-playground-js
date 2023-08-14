@@ -13,6 +13,11 @@ module.exports = {
   rules: {
     'prefer-const': 'off',
     'no-return-assign': 'off',
-    'no-use-before-define': ['error', { functions: false }],
+    'no-bitwise': 'off',
+    'max-len': 'off',
+    'no-plusplus': 'off',
+    'no-param-reassign': 'off',
+    'no-use-before-define': 'off',
+    'no-console': 'off',
   },
 };
