@@ -1,0 +1,67 @@
+{
+	// Place your algo-playground-js workspace snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"abuf": {
+		"scope": "javascript,typescript",
+		"prefix": "abuf",
+		"body": [
+			"let bs = ''",
+			"process.stdin.on('data', d => bs += d)",
+			"process.stdin.on('end', () => run(bs))"
+		],
+		"description": "读取输入流"
+	},
+	"arun": {
+		"scope": "javascript,typescript",
+		"prefix": "arun",
+		"body": [
+			"function run(bstr) {",
+			"  let buf = bstr.trim().split('\\n')",
+			"  let [n] = buf[0].split(' ').map(x => +x)",
+			"  $1",
+			"}"
+		],
+		"description": "主函数"
+	},
+	"aarr": {
+		"scope": "javascript,typescript",
+		"prefix": "aarr",
+		"body": [
+			"Array.from({length: n}, () => $1)$2"
+		],
+		"description": "创建指定长度的数组"
+	},
+	"asplit": {
+		"scope": "javascript,typescript",
+		"prefix": "asplit",
+		"body": [
+			"split(' ').map(x => +x)"
+		],
+		"description": "字符串分割为数值数组"
+	},
+	"aslice": {
+		"scope": "javascript,typescript",
+		"prefix": "aslice",
+		"body": [
+			"buf.slice(1).forEach(c => {$1})"
+		],
+		"description": "从 1 行起遍历剩余行"
+	},
+	"swap": {
+		"scope": "javascript,typescript",
+		"prefix": "swap",
+		"body": [
+			"function swap(d, a, b) {",
+			"  let t = d[a]",
+			"  d[a] = d[b]",
+			"  d[b] = t",
+			"}"
+		],
+		"description": "交换数组元素"
+	}
+}
