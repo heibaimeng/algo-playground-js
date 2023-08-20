@@ -56,10 +56,10 @@
 		"scope": "javascript,typescript",
 		"prefix": "swap",
 		"body": [
-			"function swap(d, a, b) {",
-			"  let t = d[a]",
-			"  d[a] = d[b]",
-			"  d[b] = t",
+			"function swap(a, i, j) {",
+			"  let t = a[i]",
+			"  a[i] = a[j]",
+			"  a[j] = t",
 			"}"
 		],
 		"description": "交换数组元素"
