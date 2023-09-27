@@ -19,5 +19,6 @@ module.exports = {
     'no-param-reassign': 'off',
     'no-use-before-define': 'off',
     'no-console': 'off',
+    'no-restricted-syntax': 'off',
   },
 };
