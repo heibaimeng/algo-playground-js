@@ -10,23 +10,27 @@
 		"scope": "javascript,typescript",
 		"prefix": "abuf",
 		"body": [
-			"let bs = ''",
-			"process.stdin.on('data', d => bs += d)",
-			"process.stdin.on('end', () => run(bs))"
+			"let bs = '';",
+			"process.stdin.on('data', (d) => bs += d);",
+			"process.stdin.on('end', () => run(bs));",
+			"",
+			"function run(bs) {",
+			"  let buf = bs.trim().split('\\n');",
+			"  let bp = 0;",
+			"  let readline = () => buf[bp++];",
+			"",
+			"  let [n] = readline().split(' ').map((x) => +x);",
+			"}",
 		],
-		"description": "读取输入流"
+		"description": "输入流基础框架模板"
 	},
-	"arun": {
+	"areadline": {
 		"scope": "javascript,typescript",
 		"prefix": "arun",
 		"body": [
-			"function run(bstr) {",
-			"  let buf = bstr.trim().split('\\n')",
-			"  let [n] = buf[0].split(' ').map(x => +x)",
-			"  $1",
-			"}"
+			"let line = readline().split(' ').map((x) => +x);",
 		],
-		"description": "主函数"
+		"description": "读取一行并拆分"
 	},
 	"aarr": {
 		"scope": "javascript,typescript",
@@ -36,25 +40,9 @@
 		],
 		"description": "创建指定长度的数组"
 	},
-	"asplit": {
+	"aswap": {
 		"scope": "javascript,typescript",
-		"prefix": "asplit",
-		"body": [
-			"split(' ').map(x => +x)"
-		],
-		"description": "字符串分割为数值数组"
-	},
-	"aslice": {
-		"scope": "javascript,typescript",
-		"prefix": "aslice",
-		"body": [
-			"buf.slice(1).forEach(c => {$1})"
-		],
-		"description": "从 1 行起遍历剩余行"
-	},
-	"swap": {
-		"scope": "javascript,typescript",
-		"prefix": "swap",
+		"prefix": "aswap",
 		"body": [
 			"function swap(a, i, j) {",
 			"  let t = a[i]",
@@ -64,55 +52,62 @@
 		],
 		"description": "交换数组元素"
 	},
-	"PriorityQueue": {
+	"aPriorityQueue": {
 		"scope": "javascript,typescript",
-		"prefix": "PriorityQueue",
+		"prefix": "aPriorityQueue",
 		"body": [
-			"class PriorityQueue {",
-			"  constructor({ compare }) {",
-			"    this.compare = compare",
-			"    this.heap = [0]",
-			"    this.len = 0",
-			"  }",
-			"  down(u) {",
-			"    let t = u",
-			"    if (u * 2 <= this.len && this.compare(this.heap[u * 2], this.heap[t]) < 0) t = u * 2",
-			"    if (u * 2 + 1 <= this.len && this.compare(this.heap[u * 2 + 1], this.heap[t]) < 0) t = u * 2 + 1",
-			"    if (t !== u) {",
-			"      [this.heap[t], this.heap[u]] = [this.heap[u], this.heap[t]]",
-			"      this.down(t)",
-			"    }",
-			"  }",
-			"  up (u) {",
-			"    while (u >> 1 && this.compare(this.heap[u], this.heap[u >> 1]) < 0) {",
-			"        [this.heap[u], this.heap[u >> 1]] = [this.heap[u >> 1], this.heap[u]]",
-			"        u = u >> 1",
-			"    }",
-			"  }",
-			"  enqueue(x) {",
-			"    this.len++",
-			"    this.heap[this.len] = x;",
-			"    this.up(this.len);",
-			"  }",
-			"  dequeue() {",
-			"    let t = this.heap[1]",
-			"    this.heap[1] = this.heap[this.len];",
-			"    this.len--;",
-			"    this.down(1);",
-			"    return t",
-			"  }",
-			"  clear(){",
-			"    this.len = 0",
-			"    this.heap = [0]",
-			"  }",
-			"  size() {",
-			"    return this.len",
-			"  }",
-			"  front() {",
-			"    return this.heap[1]",
-			"  }",
-			"}"
+      "class PriorityQueue {",
+      "  constructor({ compare }) {",
+      "    this.compare = compare;",
+      "    this.heap = [0];",
+      "    this.len = 0;",
+      "  }",
+      "",
+      "  down(u) {",
+      "    let t = u;",
+      "    if (u * 2 <= this.len && this.compare(this.heap[u * 2], this.heap[t]) < 0) t = u * 2;",
+      "    if (u * 2 + 1 <= this.len && this.compare(this.heap[u * 2 + 1], this.heap[t]) < 0) t = u * 2 + 1;",
+      "    if (t !== u) {",
+      "      [this.heap[t], this.heap[u]] = [this.heap[u], this.heap[t]];",
+      "      this.down(t);",
+      "    }",
+      "  }",
+      "",
+      "  up(u) {",
+      "    while (u >> 1 && this.compare(this.heap[u], this.heap[u >> 1]) < 0) {",
+      "      [this.heap[u], this.heap[u >> 1]] = [this.heap[u >> 1], this.heap[u]];",
+      "      u >>= 1;",
+      "    }",
+      "  }",
+      "",
+      "  enqueue(x) {",
+      "    this.len++;",
+      "    this.heap[this.len] = x;",
+      "    this.up(this.len);",
+      "  }",
+      "",
+      "  dequeue() {",
+      "    let t = this.heap[1];",
+      "    this.heap[1] = this.heap[this.len];",
+      "    this.len--;",
+      "    this.down(1);",
+      "    return t;",
+      "  }",
+      "",
+      "  clear() {",
+      "    this.len = 0;",
+      "    this.heap = [0];",
+      "  }",
+      "",
+      "  size() {",
+      "    return this.len;",
+      "  }",
+      "",
+      "  front() {",
+      "    return this.heap[1];",
+      "  }",
+      "}",
 		],
-		"description": "优先队列"
+		"description": "定义优先队列类"
 	}
 }
